@@ -5,7 +5,7 @@ const server = http.createServer((req,res)=>{
     // favicon ke url ko show na karne ke liye 
     if(req.url === "/favicon.ico") return res.end()
     // user ki date lene ke liye 
-    const log = `${Date.now()}: ${req.url} New Req Received \n`;
+    const log = `${Date.now()}: ${req.method} ${req.url} New Req Received \n`;
     // log file create kar ne ke liye and user ki date add kar ne ke liye 
     fs.appendFile("./log.txt" ,log ,(err,data)=>{
      switch(req.url){
