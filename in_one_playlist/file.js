@@ -20,5 +20,5 @@ fs.readFile("./test.txt" ,"utf-8",(err,result)=>{
     }
 })
 
-//  file me kuch add karna --- lakin asunc file me add karne se ye funciton kaam nhi karega line no 7 
+//  file me kuch add karna --- lakin async file me add karne se ye funciton kaam nhi karega line no 7 
 fs.appendFileSync("./test.txt" , `hello rahul\n`);
