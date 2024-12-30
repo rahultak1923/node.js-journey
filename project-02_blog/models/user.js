@@ -1,5 +1,6 @@
 const {createHmac , randomBytes} = require("crypto"); // 8. password jo has pe convert karne ke liye 
 const {Schema, model}= require("mongoose"); // 6. user create kar ne ke liye phle schema banana padta hai 
+const { createTokenForUser } = require("../services/authentication");
 
 // schema create kiya 
 const userSchema = new Schema({
@@ -61,7 +62,8 @@ userSchema.static("matchPassword",async function(email,password){
     .digest("hex")
 
     if(hashedPassword !== userProvidedHash) throw new Error('password do not match')
-    return user;
+    const token = createTokenForUser(user);
+    return token;
 })
 
 const User = model('user',userSchema); // 7. schema crete hone ke baad model crete hota hai 
