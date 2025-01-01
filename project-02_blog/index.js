@@ -1,6 +1,7 @@
 const path = require("path"); // 1. views folder ko use karne ke liye path ka use karte hai 
 const express = require('express');
 const userRoute = require('./routes/user')
+const blogRoute = require('./routes/blog')
 const mongoose = require('mongoose');
 const cookieParser = require("cookie-parser");
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
@@ -22,6 +23,7 @@ app.get("/",(req,res)=>{
     })
 })
 app.use("/user",userRoute);
+app.use("/blog",blogRoute);
 
 
 app.listen(PORT,()=> console.log(`server started at PORT: ${PORT}`)) // 5. app ko loaclhost pe host karne ke liye 
