@@ -1,7 +1,9 @@
 const path = require("path"); // 1. views folder ko use karne ke liye path ka use karte hai 
 const express = require('express');
 const userRoute = require('./routes/user')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const cookieParser = require("cookie-parser");
+const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 
 const app= express(); // 2. express js se ak app banaya jo 8000 port pe chalega 
 const PORT = 8000;
@@ -11,9 +13,13 @@ app.set("view engine","ejs"); // 3. nodejs ko bataya ki html ko show kar ne ke l
 app.set("views", path.resolve("./views")); // 4.html ke pages kaha hai vo bataya 
 
 app.use(express.urlencoded({ extended: false})) // post se jo date send karte hai to body me json format me add karne ke liye 
+app.use(cookieParser());
+app.use(checkForAuthenticationCookie("token"));
 
 app.get("/",(req,res)=>{
-    res.render('home')
+    res.render('home',{
+        user: req.user,
+    })
 })
 app.use("/user",userRoute);
 
