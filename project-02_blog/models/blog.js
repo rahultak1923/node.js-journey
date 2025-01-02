@@ -1,7 +1,8 @@
 const {Schema, model}= require("mongoose"); // 6. user create kar ne ke liye phle schema banana padta hai 
 
+
 const blogSchema = new Schema({
-    titile:{
+    title:{
         type:String,
         required: true,
     },
