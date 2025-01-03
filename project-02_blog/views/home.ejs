@@ -8,18 +8,29 @@
     <%- include('./partials/nav')  %>
 
     <div class="container mt-3">
-      <% blogs.forEach(blog => { %>
-        <div class="card" style="width: 18rem;">
-          <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title"><%= blog.title %></h5>
-            
-            <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+      <div class="row row-cols-4">
+        <% blogs.forEach(blog => { %>
+          <div class="col">
+            <div class="card col" style="width: 18rem;">
+              <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="..." height="200px">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <% if (blog.title.length > 25 ) { %>
+                    <%= blog.title.substring(0,25) %>...
+                  <% }else{ %>
+                    <%= blog.title %>
+                    <% } %>
+                  </h5>
+                
+                <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+              </div>
+            </div>
           </div>
-        </div>
-      <% }) %>
+        <% }) %>
+
+      </div>
     </div>
-    <%= JSON.stringify(blogs) %>
+    <!-- <%= JSON.stringify(blogs) %> -->
     <%- include('./partials/scripts')  %>
   </body>
 </html>
