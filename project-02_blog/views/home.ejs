@@ -7,27 +7,61 @@
 <body>
     <%- include('./partials/nav')  %>
 
-    <div class="container mt-3">
-      <div class="row row-cols-4">
-        <% blogs.forEach(blog => { %>
-          <div class="col">
-            <div class="card col" style="width: 18rem;">
-              <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="..." height="200px">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <% if (blog.title.length > 25 ) { %>
-                    <%= blog.title.substring(0,25) %>...
-                  <% }else{ %>
-                    <%= blog.title %>
-                    <% } %>
-                  </h5>
-                
-                <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+    <div class="container mt-3 ">
+      <div class="row">
+
+        <div class="row row-cols-3 col-9">
+          <% blogs.forEach(blog => { %>
+            <div class="col mb-3">
+              <div class="card col" style="width: 18rem;">
+                <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="..." height="200px">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <% if (blog.title.length > 25 ) { %>
+                      <%= blog.title.substring(0,25) %>...
+                    <% }else{ %>
+                      <%= blog.title %>
+                      <% } %>
+                    </h5>
+                  
+                    <div class="d-flex justify-content-between">
+
+                      <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+                      <form action="/blog/<%= blog._id %>?_method=DELETE" method="DELETE">
+
+                        <button  class="btn btn-danger">Delete</button>
+                      </form>
+                    </div>
+                </div>
               </div>
             </div>
-          </div>
-        <% }) %>
-
+          <% }) %>
+  
+        </div>
+        <div class="col-3">
+          <div class="row row-cols-3 col-9">
+            <div class="col">
+              <div class="card col" style="width: 18rem;">
+                <img src="<%= use.profileImageURL %>" class="card-img-top" alt="..." height="200px">
+                <div class="card-body">
+                  <h5 class="card-title">
+                   
+                      Name : <%= use.fullName %>
+                     
+                    </h5>
+                  <h5 class="card-title">
+                   
+                     Email : <%= use.email %>
+                     
+                    </h5>
+                    <h5>Total Blog <%= blogs.length %></h5>
+                  
+                </div>
+              </div>
+            </div>
+  
+        </div>
+        </div>
       </div>
     </div>
     <!-- <%= JSON.stringify(blogs) %> -->

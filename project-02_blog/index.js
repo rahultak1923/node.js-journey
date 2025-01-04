@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cookieParser = require("cookie-parser");
 const Blog = require('./models/blog')
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
+const User = require("./models/user");
 
 const app= express(); // 2. express js se ak app banaya jo 8000 port pe chalega 
 
@@ -20,13 +21,40 @@ app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
 app.use(express.static(path.resolve('./public')))
 
-app.get("/",async (req,res)=>{
-    const allBlogs = await Blog.find({})
-    res.render('home',{
-        user: req.user,
-        blogs: allBlogs,
-    })
-})
+// app.get("/",async (req,res)=>{
+//     const allBlogs = await Blog.find({})
+//     res.render('home',{
+//         user: req.user,
+//         blogs: allBlogs,
+//     })
+// })
+app.get("/", async (req, res) => {
+    try {
+        if (!req.user) {
+            // Redirect or handle case when no user is logged in
+            return res.redirect('/user/signin'); // Adjust the route as needed
+        }
+
+        // Fetch all blogs
+        const allBlogs = await Blog.find({});
+
+        // Fetch the logged-in user's data
+        const user = await User.findById(req.user._id); // Fetch only the logged-in user
+
+        // Render the home page with the logged-in user's data and blogs
+        res.render('home', {
+            use: user, // Passing the logged-in user data
+            user: req.user, // Passing additional user info from session (if needed)
+            blogs: allBlogs, // Passing all blogs
+        });
+
+        // console.log("Logged-in user:", user);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 app.use("/user",userRoute);
 app.use("/blog",blogRoute);
 

@@ -5,7 +5,7 @@ const userRouter = require('./routes/user');
 const { connectMongoDb } = require("./connection");
 
 const app = express();
-const PORT = 8000;
+const PORT = 8001;
 
 // connection
 connectMongoDb('mongodb://127.0.0.1:27017/nodejs-learning')

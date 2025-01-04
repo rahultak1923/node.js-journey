@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head> 
+    <%- include('./partials/head')  %>
+    <title>Profile </title>
+</head>
+<body>
+    <%- include('./partials/nav')  %>
+
+    <div class="container mt-3">
+      <div class="row">
+        <div class="row row-cols-3 col-9">
+            <div class="col">
+              <div class="card col" style="width: 18rem;">
+                <img src="<%= use.profileImageURL %>" class="card-img-top" alt="..." height="200px">
+                <div class="card-body">
+                  <h5 class="card-title">
+                   
+                      <%= use.fullName %>
+                     
+                    </h5>
+                  
+                </div>
+              </div>
+            </div>
+  
+        </div>
+        <!-- <div class="col-3">
+          fdsfsd
+        </div> -->
+      </div>
+    </div>
+    <%- include('./partials/scripts')  %>
+  </body>
+</html>

@@ -31,12 +31,21 @@ router.get("/logout",(req,res)=>{
     res.clearCookie("token").redirect('/')
 })
 
+router.get("/:id", async (req,res)=>{
+    const user = await User.findById(req.user._id); // Fetch user
+    return res.render("profile",{
+        use: user,
+    })
+
+})
+
 router.post("/signup", async (req, res) => {
     const { fullName, email, password } = req.body;
     await User.create({
         fullName,
         email,
         password,
+        createdBy: req.user._id,
     });
     return res.redirect('/')
 })
