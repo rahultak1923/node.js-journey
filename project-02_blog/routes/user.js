@@ -45,7 +45,7 @@ router.post("/signup", async (req, res) => {
         fullName,
         email,
         password,
-        createdBy: req.user._id,
+        createdBy: req.user_id,
     });
     return res.redirect('/')
 })
