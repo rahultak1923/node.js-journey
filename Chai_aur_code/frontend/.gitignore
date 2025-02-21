@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+#  npm i axios
+#  npm create vite@latest .
+#  npm i 
+#  npm i react-router-dom
