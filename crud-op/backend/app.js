@@ -8,7 +8,7 @@ const PORT = 8000;
 
 app.use(cors({
   origin: "*",  // Allow frontend to access API
-  methods: ["GET", "POST", "PUT", "DELETE"],  // Allowed HTTP methods
+  methods: ["GET", "POST", "PUT", "DELETE","PATCH"],  // Allowed HTTP methods
   credentials: true  // Allow cookies/auth headers
 }));
 

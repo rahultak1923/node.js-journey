@@ -11,6 +11,12 @@ user
     return res.json(Json)
 })
 
+router.get('/:id',async(req,res)=>{
+    const userid = req.params.id;
+    const user = await User.findById(userid);
+    return res.json({user})
+})
+
 router.post("/signin", async (req,res)=>{
     const {fullName, email, password}= req.body;
     console.log(req.body)
@@ -36,7 +42,7 @@ router.delete("/delete/:id", async (req, res) => {
   })
 
 
-  router.patch("/update/:id", async (req, res) => {
+  router.put("/update/:id", async (req, res) => {
     try {
         const userid = req.params.id;
         const { fullName, email, password } = req.body;

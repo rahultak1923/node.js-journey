@@ -27,3 +27,14 @@ export const DeleteUser = async (userId) => {
 
     return await response.json();
 };
+
+export const UpdateUser = async (userId, formData) => {
+    const response = await fetch(`http://localhost:8000/user/update/${userId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    });
+    return await response.json();
+};

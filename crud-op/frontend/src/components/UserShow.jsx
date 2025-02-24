@@ -48,7 +48,8 @@ const UserShow = () => {
               delete
             </button>
 
-            <Edit />
+            <Edit userId={user._id} userData={user} />
+
             </div>
           </>
         ))
